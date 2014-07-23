@@ -5,7 +5,7 @@ module CarrierWave
 
       def initialize(format, options)
         @format = format.to_s
-        @resolution = options[:resolution] || "640x360"
+        @resolution = options[:resolution]
         @custom = options[:custom]
         @callbacks = options[:callbacks] || {}
         @logger = options[:logger]
@@ -31,7 +31,7 @@ module CarrierWave
       end
 
       def encoder_options
-        { preserve_aspect_ratio: :width }
+        { }
       end
 
       # input
@@ -76,7 +76,7 @@ module CarrierWave
       private
 
         def defaults
-          @defaults ||= { resolution: '640x360', watermark: {} }.tap do |h|
+          @defaults ||= { watermark: {} }.tap do |h|
             case format
             when 'mp4'
               h[:video_codec] = 'libx264'
